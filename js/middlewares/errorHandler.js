@@ -3,7 +3,13 @@ function errorHandler(parseFunction) {
     try {
       return parseFunction(...args);
     } catch (error) {
-      console.error("Error parsing HTML:", error.message);
+      const position =
+        error.position !== undefined ? `at position ${error.position}` : "";
+      const errorMessage = error.message || "Unknown parsing error";
+      console.error("Error parsing HTML:", errorMessage, position);
+
+      error.message = position ? `${errorMessage} (${position})` : errorMessage;
+
       throw error;
     }
   };

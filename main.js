@@ -10,32 +10,33 @@ const firstTemplateBtn = document.querySelector("#output-first-template");
 const secondTemplateBtn = document.querySelector("#output-second-template");
 const clearBtn = document.querySelector("#clear-btn");
 
-convertBtn.addEventListener("click", () => {
-  const htmlValue = html.value;
+function handleConversion(htmlValue) {
   state.doctypeCount = 0;
   try {
     const result = html2json(htmlValue);
     json.value = JSON.stringify(result, null, 2);
   } catch (error) {
-    json.value = "Error: " + error.message;
+    json.value = `Error: ${error.message}`;
+    console.error("Conversion error:", error);
   }
+}
+
+convertBtn.addEventListener("click", () => {
+  handleConversion(html.value);
 });
 
 firstTemplateBtn.addEventListener("click", () => {
   html.value = templateFirst;
-  state.doctypeCount = 0;
-  const result = html2json(templateFirst);
-  json.value = JSON.stringify(result, null, 2);
+  handleConversion(templateFirst);
 });
 
 secondTemplateBtn.addEventListener("click", () => {
   html.value = templateSecond;
-  state.doctypeCount = 0;
-  const result = html2json(templateSecond);
-  json.value = JSON.stringify(result, null, 2);
+  handleConversion(templateSecond);
 });
 
 clearBtn.addEventListener("click", () => {
   state.doctypeCount = 0;
+  html.value = "";
   json.value = "";
 });
