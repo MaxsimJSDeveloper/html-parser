@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styles.css" />
+    <title>Convertor</title>
+  </head>
+  <body>
+    <h1>Convertor HTML to JSON</h1>
+
+    <main>
+      <div class="container">
+        <div class="field">
+          <label for="html">Input HTML:</label>
+          <textarea
+            id="html"
+            class="textarea"
+            placeholder="Enter your HTML"
+          ></textarea>
+        </div>
+        <div class="field">
+          <label for="json">Results of conversion:</label>
+          <textarea
+            class="textarea"
+            disabled
+            id="json"
+            placeholder="Output"
+          ></textarea>
+        </div>
+      </div>
+      <div class="buttons">
+        <button class="btn" id="convert-btn">Convert to JSON</button>
+        <button class="btn" id="clear-btn">Clear Output</button>
+        <button class="btn" id="output-first-template">Input Example 1</button>
+        <button class="btn" id="output-second-template">Input Example 2</button>
+      </div>
+    </main>
+    <script src="./main.js" type="module"></script>
+  </body>
+</html>
