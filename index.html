@@ -3,37 +3,67 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="HTML to JSON Converter - Convert your HTML code into JSON format easily and efficiently."
+    />
+    <meta name="keywords" content="HTML, JSON, Converter, Web Development" />
+    <meta name="author" content="Your Name" />
     <link rel="stylesheet" href="./styles.css" />
-    <title>Convertor</title>
+    <title>HTML to JSON Converter</title>
   </head>
   <body>
-    <h1>Convertor HTML to JSON</h1>
-
     <main>
       <div class="container">
-        <div class="field">
-          <label for="html">Input HTML:</label>
-          <textarea
-            id="html"
-            class="textarea"
-            placeholder="Enter your HTML"
-          ></textarea>
-        </div>
-        <div class="field">
-          <label for="json">Results of conversion:</label>
-          <textarea
-            class="textarea"
-            disabled
-            id="json"
-            placeholder="Output"
-          ></textarea>
-        </div>
-      </div>
-      <div class="buttons">
-        <button class="btn" id="convert-btn">Convert to JSON</button>
-        <button class="btn" id="clear-btn">Clear Output</button>
-        <button class="btn" id="output-first-template">Input Example 1</button>
-        <button class="btn" id="output-second-template">Input Example 2</button>
+        <h1 class="main-title">Convertor HTML to JSON</h1>
+        <section class="section-indentation">
+          <div class="converting-fields">
+            <div class="field">
+              <label for="html">Input HTML:</label>
+              <textarea
+                id="html"
+                class="textarea"
+                placeholder="Enter your HTML"
+                aria-label="Input HTML"
+                required
+              ></textarea>
+            </div>
+            <div class="field">
+              <label for="json">Results of conversion:</label>
+              <textarea
+                class="textarea"
+                disabled
+                id="json"
+                placeholder="Output"
+                aria-label="Output JSON"
+              ></textarea>
+            </div>
+          </div>
+        </section>
+        <section>
+          <div class="buttons">
+            <button class="btn" id="convert-btn" aria-label="Convert to JSON">
+              Convert to JSON
+            </button>
+            <button class="btn" id="clear-btn" aria-label="Clear output">
+              Clear Output
+            </button>
+            <button
+              class="btn"
+              id="output-first-template"
+              aria-label="Input Example 1"
+            >
+              Input Example 1
+            </button>
+            <button
+              class="btn"
+              id="output-second-template"
+              aria-label="Input Example 2"
+            >
+              Input Example 2
+            </button>
+          </div>
+        </section>
       </div>
     </main>
     <script src="./main.js" type="module"></script>
