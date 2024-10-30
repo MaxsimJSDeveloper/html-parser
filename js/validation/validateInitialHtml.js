@@ -9,11 +9,14 @@ function validateInitialHtml(html) {
     throw new Error("HTML input cannot be empty");
   }
 
+  if (trimmedHtml.length > 10000) {
+    throw new Error("html cannot contain more than 10000 characters");
+  }
+
   if (!trimmedHtml.startsWith("<")) {
     throw new Error("HTML code must start with '<'");
   }
 
-  // Basic HTML structure validation
   const openTags = trimmedHtml.match(/<[^/>][^>]*>/g) || [];
   const closeTags = trimmedHtml.match(/<\/[^>]+>/g) || [];
 

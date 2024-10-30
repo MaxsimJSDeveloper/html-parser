@@ -19,17 +19,19 @@
         <section class="section-indentation">
           <div class="converting-fields">
             <div class="field">
-              <label for="html">Input HTML:</label>
+              <label class="label" for="html">Input HTML:</label>
+              <div class="line-numbers" id="line-numbers"></div>
               <textarea
                 id="html"
                 class="textarea"
                 placeholder="Enter your HTML"
                 aria-label="Input HTML"
                 required
+                maxlength="10000"
               ></textarea>
             </div>
             <div class="field">
-              <label for="json">Results of conversion:</label>
+              <label class="label" for="json">Results of conversion:</label>
               <textarea
                 class="textarea"
                 disabled
