@@ -6,9 +6,13 @@ function parseAttributes(tagNameEnd, tagEnd) {
   const attrRegex = /([^\s=]+)(?:="([^"]*)")?/g;
   let match;
 
-  while ((match = attrRegex.exec(attrString)) !== null) {
-    const [, name, value] = match;
-    attributes[name] = value || "";
+  try {
+    while ((match = attrRegex.exec(attrString)) !== null) {
+      const [, name, value] = match;
+      attributes[name] = value || "";
+    }
+  } catch (error) {
+    throw new Error(`Failed to parse attributes at position: ${state.pos}`);
   }
 
   return Object.keys(attributes).length ? attributes : undefined;
