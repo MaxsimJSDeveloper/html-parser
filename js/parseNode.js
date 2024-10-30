@@ -44,8 +44,11 @@ function parseNode() {
 
   state.pos = tagEnd + 1;
 
+  let foundClosingTag = false;
+
   while (state.pos < state.html.length) {
     if (state.html.startsWith(`</${tagName}>`, state.pos)) {
+      foundClosingTag = true;
       state.pos += tagName.length + 3;
       break;
     }
@@ -54,6 +57,10 @@ function parseNode() {
     if (child) {
       node.children.push(child);
     }
+  }
+
+  if (!foundClosingTag) {
+    throw new Error(`Unclosed tag: <${tagName}> at position ${state.pos}`);
   }
 
   if (!node.children.length) {

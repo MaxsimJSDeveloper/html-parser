@@ -10,7 +10,7 @@ function validateInitialHtml(html) {
   }
 
   if (trimmedHtml.length > 10000) {
-    throw new Error("html cannot contain more than 10000 characters");
+    throw new Error("HTML cannot contain more than 10000 characters");
   }
 
   if (!trimmedHtml.startsWith("<")) {
@@ -22,6 +22,13 @@ function validateInitialHtml(html) {
 
   if (openTags.length < closeTags.length) {
     throw new Error("Found more closing tags than opening tags");
+  }
+
+  const tagOpenCount = (trimmedHtml.match(/</g) || []).length;
+  const tagCloseCount = (trimmedHtml.match(/>/g) || []).length;
+
+  if (tagOpenCount > tagCloseCount) {
+    throw new Error("Found unclosed tags in the HTML");
   }
 }
 

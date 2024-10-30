@@ -16,7 +16,7 @@ function html2json(html) {
   const nodes = [];
 
   const safeParseNode = errorHandler((...args) => {
-    const node = parseNode(...args);
+    const node = parseNode();
     validateNode(node);
     return node;
   });
