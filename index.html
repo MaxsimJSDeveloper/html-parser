@@ -9,13 +9,29 @@
     />
     <meta name="keywords" content="HTML, JSON, Converter, Web Development" />
     <meta name="author" content="Maksym" />
+    <link rel="icon" href="/img/parser.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="./styles.css" />
     <title>HTML to JSON Converter</title>
   </head>
   <body>
-    <main>
+    <header class="header">
+      <div class="header-container">
+        <img src="./img/logo.webp" alt="logo" width="36" />
+        <p>Convertor HTML to JSON</p>
+      </div>
+    </header>
+    <main class="main">
       <div class="container">
-        <h1 class="main-title">Convertor HTML to JSON</h1>
+        <h2 id="description" class="main-title">Convertor HTML to JSON</h2>
+        <section class="section-indentation">
+          <p class="text-desc">
+            This converter allows you to transform your HTML code into JSON
+            format. Simply paste your HTML code into the input field and click
+            "Convert to JSON" to get the output. This tool is ideal for
+            developers who need to process HTML content in a JSON format for
+            various applications.
+          </p>
+        </section>
         <section class="section-indentation">
           <div class="converting-fields">
             <div class="field">
@@ -26,6 +42,7 @@
                 class="textarea"
                 placeholder="Enter your HTML"
                 aria-label="Input HTML"
+                aria-labelledby="html-label"
                 required
                 maxlength="10000"
               ></textarea>
@@ -38,6 +55,7 @@
                 id="json"
                 placeholder="Output"
                 aria-label="Output JSON"
+                aria-labelledby="json-label"
               ></textarea>
             </div>
           </div>
@@ -68,6 +86,11 @@
         </section>
       </div>
     </main>
+    <footer class="footer">
+      <div class="footer-container">
+        <p>&copy; 2024 Maksym. All rights reserved.</p>
+      </div>
+    </footer>
     <script src="./main.js" type="module"></script>
   </body>
 </html>

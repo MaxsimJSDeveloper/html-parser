@@ -1,4 +1,4 @@
-import { state } from "../state.js";
+import state from "../state.js";
 import skipWhitespace from "../utils/skipWhitespace.js";
 
 function parseText() {

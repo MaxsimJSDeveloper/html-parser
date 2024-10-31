@@ -1,4 +1,4 @@
-import { state } from "../state.js";
+import state from "../state.js";
 
 function skipWhitespace() {
   while (state.pos < state.html.length && /\s/.test(state.html[state.pos])) {

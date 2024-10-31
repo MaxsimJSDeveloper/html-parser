@@ -1,6 +1,7 @@
 import html2json from "./html2json.js";
 import refs from "./refs.js";
-import { state } from "./state.js";
+import state from "./state.js";
+
 import updateLineNumbers from "./ui/updateLineNumbers.js";
 
 const eventHandlers = {

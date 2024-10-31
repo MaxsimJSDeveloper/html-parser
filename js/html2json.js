@@ -1,8 +1,9 @@
 import parseNode from "./parseNode.js";
 import validateInitialHtml from "./validation/validateInitialHtml.js";
-import { state } from "./state.js";
+
 import normalizeHtml from "./utils/normalizeHtml.js";
 import validateNode from "./validation/validateNode.js";
+import state from "./state.js";
 
 function html2json(html) {
   validateInitialHtml(html);

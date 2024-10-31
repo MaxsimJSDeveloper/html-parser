@@ -1,4 +1,3 @@
-// Исправленный код функции parseNode
 import parseClosingTag from "./parsers/parseClosingTag.js";
 import parseComment from "./parsers/parseComment.js";
 import parseDoctype from "./parsers/parseDoctype.js";
@@ -6,12 +5,10 @@ import parseOpeningTag from "./parsers/parseOpeningTag.js";
 import parseText from "./parsers/parseText.js";
 import skipWhitespace from "./utils/skipWhitespace.js";
 
-import { SELF_CLOSING_TAGS } from "./utils/selfTags.js";
+import { SELF_CLOSING_TAGS, CLOSING_TAG_LENGTH } from "./constance.js";
 import parseCssContent from "./parsers/parseCssContent.js";
 import getErrorContext from "./utils/getErrorContext.js";
-import { state } from "./state.js";
-
-const CLOSING_TAG_LENGTH = 3;
+import state from "./state.js";
 
 function parseNode() {
   try {
@@ -57,9 +54,7 @@ function parseNode() {
     if (tagName === "style") {
       const endPos = state.html.indexOf(`</${tagName}>`, state.pos);
       if (endPos === -1) {
-        throw new Error(
-          `Unclosed style tag <${tagName}> near: ${getErrorContext(state.pos)}`
-        );
+        throw new Error(`Unclosed style tag <${tagName}>`);
       }
 
       const cssContent = state.html.slice(state.pos, endPos);
@@ -79,18 +74,12 @@ function parseNode() {
       if (child) {
         node.children.push(child);
       } else {
-        throw new Error(
-          `Failed to parse child node of <${tagName}> near: ${getErrorContext(
-            state.pos
-          )}`
-        );
+        throw new Error(`Failed to parse child node of <${tagName}>`);
       }
     }
 
     if (!foundClosingTag) {
-      throw new Error(
-        `Unclosed tag <${tagName}> near: ${getErrorContext(state.pos)}`
-      );
+      throw new Error(`Unclosed tag <${tagName}>`);
     }
 
     if (!node.children.length) {

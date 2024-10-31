@@ -1,4 +1,4 @@
-import { state } from "../state.js";
+import state from "../state.js";
 
 function parseAttributes(tagNameEnd, tagEnd) {
   const attributes = {};

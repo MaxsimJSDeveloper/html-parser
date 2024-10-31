@@ -1,4 +1,4 @@
-import { state } from "../state.js";
+import state from "../state.js";
 import getErrorContext from "../utils/getErrorContext.js";
 import parseAttributes from "./parseAttributes.js";
 

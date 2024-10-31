@@ -1,4 +1,4 @@
-import { state } from "../state.js";
+import state from "../state.js";
 
 function validateNode(node) {
   if (!node) return;
