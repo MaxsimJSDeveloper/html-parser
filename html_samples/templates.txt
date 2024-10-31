@@ -40,3 +40,28 @@
   <button>Click me!</button>
   <textarea>Some very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very long string.</textarea>
 </div>
+
+<!DOCTYPE html>
+<div>
+    <p>Пример текста
+    <span>Некорректный HTML
+</div>
+
+<!DOCTYPE html>
+<div>
+    <p>Текст внутри абзаца <span>с ошибкой <b>и еще одной ошибкой</b></span>
+</div>
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Некорректная структура</title>
+</head>
+<body>
+    <h1>Заголовок</h1>
+    <div>
+        <p>Первый параграф
+    </div>
+    </body>
+</html>
