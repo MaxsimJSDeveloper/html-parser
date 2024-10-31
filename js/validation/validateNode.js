@@ -5,11 +5,6 @@ function validateNode(node) {
 
   if (node.type === "doctype") {
     state.doctypeCount++;
-    if (state.doctypeCount > 1) {
-      const error = new Error("HTML document can only have one doctype");
-      error.position = state.pos;
-      throw error;
-    }
 
     const contentBeforeDoctype = state.html.substring(0, state.pos).trim();
     if (contentBeforeDoctype && !contentBeforeDoctype.startsWith("<!DOCTYPE")) {

@@ -16,7 +16,7 @@ function parseText() {
     }
     return null;
   } catch (error) {
-    throw new Error(`Failed to parse text at position: ${state.pos}`);
+    throw new Error(`Text Parsing Error: Unable to parse text content.`);
   }
 }
 

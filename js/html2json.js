@@ -6,6 +6,7 @@ import validateNode from "./validation/validateNode.js";
 
 function html2json(html) {
   validateInitialHtml(html);
+
   state.html = normalizeHtml(html);
   state.pos = 0;
   state.doctypeCount = 0;
@@ -21,7 +22,7 @@ function html2json(html) {
         throw new Error(`Failed to parse HTML at position ${state.pos}.`);
       }
     } catch (error) {
-      throw error;
+      throw new Error(error.message);
     }
   }
 

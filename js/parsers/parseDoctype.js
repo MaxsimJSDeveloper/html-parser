@@ -1,4 +1,5 @@
 import { state } from "../state.js";
+import getErrorContext from "../utils/getErrorContext.js";
 
 function parseDoctype() {
   try {
@@ -6,10 +7,20 @@ function parseDoctype() {
       state.html.substring(state.pos, state.pos + 9).toLowerCase() ===
       "<!doctype"
     ) {
+      if (state.doctypeCount >= 1) {
+        throw new Error(
+          `Multiple DOCTYPE declarations found near: "${getErrorContext(
+            state.pos
+          )}..."`
+        );
+      }
+
       const doctypeEnd = state.html.indexOf(">", state.pos);
       if (doctypeEnd === -1) {
         throw new Error(
-          `Missing closing '>' for doctype at position: ${state.pos}`
+          `Missing closing '>' for doctype near: "${getErrorContext(
+            state.pos
+          )}..."`
         );
       }
 
@@ -20,6 +31,8 @@ function parseDoctype() {
 
       state.pos = doctypeEnd + 1;
 
+      state.doctypeCount++;
+
       return {
         type: "doctype",
         name: doctypeContent,
@@ -27,7 +40,10 @@ function parseDoctype() {
     }
     return null;
   } catch (error) {
-    throw new Error(`Failed to parse doctype at position: ${state.pos}`);
+    error.message = `Error parsing doctype near: "${getErrorContext(
+      state.pos
+    )}...". Check doctype syntax.`;
+    throw error;
   }
 }
 

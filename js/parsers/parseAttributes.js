@@ -9,13 +9,19 @@ function parseAttributes(tagNameEnd, tagEnd) {
   try {
     while ((match = attrRegex.exec(attrString)) !== null) {
       const [, name, value] = match;
+      if (!name) {
+        throw new Error(
+          `Failed to parse attribute name in tag: "${attrString}"`
+        );
+      }
       attributes[name] = value || "";
     }
   } catch (error) {
-    throw new Error(`Failed to parse attributes at position: ${state.pos}`);
+    error.message = `Error parsing attributes for tag with content: "${attrString}". Please check the syntax.`;
+    throw error;
   }
 
-  return Object.keys(attributes).length ? attributes : undefined;
+  return Object.keys(attributes).length ? attributes : null;
 }
 
 export default parseAttributes;

@@ -13,6 +13,10 @@ function validateInitialHtml(html) {
     throw new Error("HTML cannot contain more than 10000 characters");
   }
 
+  if (!trimmedHtml.includes("<!DOCTYPE")) {
+    throw new Error("HTML document must have a DOCTYPE declaration.");
+  }
+
   if (!trimmedHtml.startsWith("<")) {
     throw new Error("HTML code must start with '<'");
   }

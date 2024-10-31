@@ -1,3 +1,4 @@
+// Исправленный код функции parseNode
 import parseClosingTag from "./parsers/parseClosingTag.js";
 import parseComment from "./parsers/parseComment.js";
 import parseDoctype from "./parsers/parseDoctype.js";
@@ -5,8 +6,10 @@ import parseOpeningTag from "./parsers/parseOpeningTag.js";
 import parseText from "./parsers/parseText.js";
 import skipWhitespace from "./utils/skipWhitespace.js";
 
-import { state } from "./state.js";
 import { SELF_CLOSING_TAGS } from "./utils/selfTags.js";
+import parseCssContent from "./parsers/parseCssContent.js";
+import getErrorContext from "./utils/getErrorContext.js";
+import { state } from "./state.js";
 
 const CLOSING_TAG_LENGTH = 3;
 
@@ -30,7 +33,9 @@ function parseNode() {
 
     const { tagName, tagEnd, selfClosing, attributes } = parseOpeningTag();
     if (!tagName) {
-      throw new Error(`Invalid opening tag at position: ${state.pos}`);
+      throw new Error(
+        `Invalid opening tag near: ${getErrorContext(state.pos)}`
+      );
     }
 
     const node = {
@@ -49,6 +54,20 @@ function parseNode() {
     state.pos = tagEnd + 1;
     let foundClosingTag = false;
 
+    if (tagName === "style") {
+      const endPos = state.html.indexOf(`</${tagName}>`, state.pos);
+      if (endPos === -1) {
+        throw new Error(
+          `Unclosed style tag <${tagName}> near: ${getErrorContext(state.pos)}`
+        );
+      }
+
+      const cssContent = state.html.slice(state.pos, endPos);
+      node.cssRules = parseCssContent(cssContent);
+      state.pos = endPos + tagName.length + CLOSING_TAG_LENGTH;
+      return node;
+    }
+
     while (state.pos < state.html.length) {
       if (state.html.startsWith(`</${tagName}>`, state.pos)) {
         foundClosingTag = true;
@@ -60,12 +79,18 @@ function parseNode() {
       if (child) {
         node.children.push(child);
       } else {
-        throw new Error(`Failed to parse child node at position: ${state.pos}`);
+        throw new Error(
+          `Failed to parse child node of <${tagName}> near: ${getErrorContext(
+            state.pos
+          )}`
+        );
       }
     }
 
     if (!foundClosingTag) {
-      throw new Error(`Unclosed tag: <${tagName}> at position: ${state.pos}`);
+      throw new Error(
+        `Unclosed tag <${tagName}> near: ${getErrorContext(state.pos)}`
+      );
     }
 
     if (!node.children.length) {
@@ -74,7 +99,6 @@ function parseNode() {
 
     return node;
   } catch (error) {
-    error.position = state.pos;
     throw error;
   }
 }
