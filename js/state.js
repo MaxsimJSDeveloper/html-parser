@@ -4,4 +4,4 @@ const state = {
   doctypeCount: 0,
 };
 
-export default state
+export default state;

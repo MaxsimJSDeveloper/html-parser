@@ -3,8 +3,15 @@
   box-sizing: border-box;
 }
 
+@font-face {
+  font-family: "Inter";
+  src: url("./fonts/Inter28pt-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+}
+
 body {
-  font-family: "Arial", sans-serif;
+  font-family: "Inter", sans-serif;
   font-weight: 400;
   letter-spacing: 0.04em;
   background-color: #002a3e;
