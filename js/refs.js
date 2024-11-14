@@ -5,7 +5,7 @@ const refs = {
   firstTemplateBtn: document.querySelector("#output-first-template"),
   secondTemplateBtn: document.querySelector("#output-second-template"),
   clearBtn: document.querySelector("#clear-btn"),
-  lineNumbers: document.getElementById("line-numbers"),
+  lineNumbers: document.querySelector("#line-numbers"),
 };
 
 export default refs;
